@@ -1,0 +1,529 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard NPS - Rede Shopper</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #EA1D2C 0%, #FF6B35 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #EA1D2C;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .section {
+            background: white;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .section h2 {
+            color: #EA1D2C;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #FF6B35;
+        }
+        
+        .chart-container {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        
+        .chart-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .insight-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .insight-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #FFD23F;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        th {
+            background: #EA1D2C;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .classification-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .excellent { background-color: #00A86B; }
+        .good { background-color: #F79D00; }
+        .regular { background-color: #FF6B35; }
+        .poor { background-color: #EA1D2C; }
+        
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .header h1 { font-size: 2rem; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .insights-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏪 Dashboard NPS - Rede Shopper</h1>
+        <p>Análise Completa de Performance e Satisfação do Cliente</p>
+        <p style="font-size: 1rem; margin-top: 1rem;">Gerado em: 29/10/2025 às 21:25</p>
+    </div>
+
+    <div class="container">
+        <!-- Estatísticas Principais -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">65.7</div>
+                <div class="stat-label">NPS Médio da Rede</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">88</div>
+                <div class="stat-label">Total de Lojas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">22,569</div>
+                <div class="stat-label">Total de Pedidos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">14.6%</div>
+                <div class="stat-label">Taxa de Avaliação</div>
+            </div>
+        </div>
+
+        <!-- Insights Principais -->
+        <div class="insights-grid">
+            <div class="insight-card">
+                <h3>📊 Performance Geral</h3>
+                <p>A rede Shopper apresenta um NPS médio de <strong>65.7</strong>, indicando uma performance sólida na satisfação do cliente. Com 50 lojas na categoria "Excelente" de um total de 88 lojas.</p>
+            </div>
+            <div class="insight-card">
+                <h3>🎯 Oportunidades</h3>
+                <p>Existem 15 lojas com NPS abaixo de 50, representando oportunidades claras de melhoria e foco em ações corretivas.</p>
+            </div>
+            <div class="insight-card">
+                <h3>📈 Engajamento</h3>
+                <p>A taxa média de avaliação é de 14.6%, indicando um bom nível de engajamento dos clientes em deixar feedback sobre suas experiências.</p>
+            </div>
+            <div class="insight-card">
+                <h3>🏆 Liderança</h3>
+                <p>A loja com melhor performance apresenta NPS de <strong>100.0</strong>, servindo como benchmark para as demais unidades da rede.</p>
+            </div>
+        </div>
+
+        <!-- Distribuição do NPS -->
+        <div class="section">
+            <h2>📊 Distribuição do NPS por Loja</h2>
+            <div class="chart-container">
+                <img src="data:image/png;base64," alt="Distribuição do NPS">
+            </div>
+            <p style="text-align: center; color: #666; margin-top: 1rem;">
+                Histograma mostrando como o NPS está distribuído entre as lojas da rede Shopper
+            </p>
+        </div>
+
+        <!-- Classificação das Lojas -->
+        <div class="section">
+            <h2>🏷️ Classificação das Lojas por Faixa de NPS</h2>
+            <div class="chart-container">
+                <img src="data:image/png;base64," alt="Classificação NPS">
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Classificação</th>
+                            <th>Quantidade</th>
+                            <th>Percentual</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>Excelente (≥70)</td>
+                            <td>50</td>
+                            <td>56.8%</td>
+                            <td><span class="classification-badge excellent">Excelente</span></td>
+                        </tr>
+    
+                        <tr>
+                            <td>Bom (50-69)</td>
+                            <td>23</td>
+                            <td>26.1%</td>
+                            <td><span class="classification-badge good">Bom</span></td>
+                        </tr>
+    
+                        <tr>
+                            <td>Regular (0-49)</td>
+                            <td>12</td>
+                            <td>13.6%</td>
+                            <td><span class="classification-badge regular">Regular</span></td>
+                        </tr>
+    
+                        <tr>
+                            <td>Ruim (<0)</td>
+                            <td>3</td>
+                            <td>3.4%</td>
+                            <td><span class="classification-badge poor">Ruim</span></td>
+                        </tr>
+    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Top Performers -->
+        <div class="section">
+            <h2>🏆 Top 15 Lojas com Melhor NPS</h2>
+            <div class="chart-container">
+                <img src="data:image/png;base64," alt="Top 15 Lojas">
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Posição</th>
+                            <th>Loja</th>
+                            <th>NPS</th>
+                            <th>Pedidos Totais</th>
+                            <th>Taxa Avaliação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>1º</td>
+                            <td>Shopper | São Carlos</td>
+                            <td><strong>100.0</strong></td>
+                            <td>80</td>
+                            <td>12.5%</td>
+                        </tr>
+    
+                        <tr>
+                            <td>2º</td>
+                            <td>Shopper | São Paulo 17</td>
+                            <td><strong>100.0</strong></td>
+                            <td>36</td>
+                            <td>27.8%</td>
+                        </tr>
+    
+                        <tr>
+                            <td>3º</td>
+                            <td>Shopper | São Paulo 13</td>
+                            <td><strong>100.0</strong></td>
+                            <td>28</td>
+                            <td>10.7%</td>
+                        </tr>
+    
+                        <tr>
+                            <td>4º</td>
+                            <td>Shopper | Serrana</td>
+                            <td><strong>100.0</strong></td>
+                            <td>26</td>
+                            <td>23.1%</td>
+                        </tr>
+    
+                        <tr>
+                            <td>5º</td>
+                            <td>Shopper | Sorocaba</td>
+                            <td><strong>100.0</strong></td>
+                            <td>23</td>
+                            <td>13.0%</td>
+                        </tr>
+    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Bottom Performers -->
+        <div class="section">
+            <h2>⚠️ Lojas com Menor NPS (Requerem Atenção)</h2>
+            <div class="chart-container">
+                <img src="data:image/png;base64," alt="Bottom 10 Lojas">
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Loja</th>
+                            <th>NPS</th>
+                            <th>Pedidos Totais</th>
+                            <th>Promotores</th>
+                            <th>Detratores</th>
+                            <th>Recomendação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>Pet.shopper | Alphaville 1</td>
+                            <td><strong style="color: #EA1D2C;">-100.0</strong></td>
+                            <td>3</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>🚨 Intervenção Urgente</td>
+                        </tr>
+    
+                        <tr>
+                            <td>Pet.shopper | São Paulo 14</td>
+                            <td><strong style="color: #EA1D2C;">-100.0</strong></td>
+                            <td>2</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>🚨 Intervenção Urgente</td>
+                        </tr>
+    
+                        <tr>
+                            <td>Shopper | São Paulo 19</td>
+                            <td><strong style="color: #EA1D2C;">-40.0</strong></td>
+                            <td>21</td>
+                            <td>1</td>
+                            <td>3</td>
+                            <td>🚨 Intervenção Urgente</td>
+                        </tr>
+    
+                        <tr>
+                            <td>Shopper | Mairiporã</td>
+                            <td><strong style="color: #EA1D2C;">0.0</strong></td>
+                            <td>23</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>⚠️ Plano de Ação Imediato</td>
+                        </tr>
+    
+                        <tr>
+                            <td>Shopper | Embu das Artes</td>
+                            <td><strong style="color: #EA1D2C;">0.0</strong></td>
+                            <td>11</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>⚠️ Plano de Ação Imediato</td>
+                        </tr>
+    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Análises Correlacionais -->
+        <div class="section">
+            <h2>📈 Análises de Correlação</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #666; margin-bottom: 1rem;">Volume de Pedidos vs NPS</h3>
+                    <div class="chart-container">
+                        <img src="data:image/png;base64," alt="Volume vs NPS">
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="color: #666; margin-bottom: 1rem;">Taxa de Avaliação vs NPS</h3>
+                    <div class="chart-container">
+                        <img src="data:image/png;base64," alt="Taxa Avaliação vs NPS">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Análise de Comentários -->
+        <div class="section">
+            <h2>💬 Análise de Comentários</h2>
+            
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h3>📝 Volume de Feedback</h3>
+                    <p>Total de <strong>438</strong> comentários analisados, fornecendo insights valiosos sobre a experiência do cliente na rede Shopper.</p>
+                </div>
+                <div class="insight-card">
+                    <h3>🔍 Análise Qualitativa</h3>
+                    <p>Os comentários foram processados para identificar padrões de satisfação e insatisfação, destacando áreas de melhoria específicas.</p>
+                </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                <div>
+                    <h3 style="color: #666; margin-bottom: 1rem;">Distribuição por Tipo de Avaliação</h3>
+                    <div class="chart-container">
+                        <img src="data:image/png;base64," alt="Distribuição Comentários">
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="color: #666; margin-bottom: 1rem;">Palavras Mais Frequentes</h3>
+                    <div class="chart-container">
+                        <img src="data:image/png;base64," alt="Palavras Comuns">
+                    </div>
+                </div>
+            </div>
+            
+            <h3 style="color: #666; margin: 2rem 0 1rem 0;">Nuvem de Palavras dos Comentários</h3>
+            <div class="chart-container">
+                <img src="data:image/png;base64," alt="Nuvem de Palavras">
+            </div>
+        </div>
+
+        <!-- Recomendações -->
+        <div class="section">
+            <h2>💡 Recomendações Estratégicas</h2>
+            
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h3>🎯 Foco nas Lojas Críticas</h3>
+                    <p>Implementar planos de ação específicos para as 15 lojas com NPS abaixo de 50, priorizando aquelas com NPS negativo.</p>
+                </div>
+                
+                <div class="insight-card">
+                    <h3>📚 Benchmarking Interno</h3>
+                    <p>Utilizar as práticas das top performers como benchmark para replicar o sucesso nas demais unidades da rede.</p>
+                </div>
+                
+                <div class="insight-card">
+                    <h3>📊 Monitoramento Contínuo</h3>
+                    <p>Estabelecer uma rotina de monitoramento mensal do NPS por loja, com alertas automáticos para quedas significativas.</p>
+                </div>
+                
+                <div class="insight-card">
+                    <h3>🗣️ Feedback Loop</h3>
+                    <p>Criar um processo estruturado de resposta aos comentários negativos e implementação de melhorias baseadas no feedback dos clientes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Dashboard desenvolvido para análise de NPS da Rede Shopper</p>
+        <p style="margin-top: 0.5rem; opacity: 0.8;">iFood - Equipe de Análise de Dados</p>
+    </div>
+</body>
+</html>
